@@ -11,6 +11,7 @@
 	<groupId>com.example</groupId>
 	<artifactId>jdnd-ecommerce</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
 	<name>jdnd-ecommerce</name>
 	<description>Demo project for Spring Boot</description>
 
@@ -80,8 +81,9 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.8.1</version>
 				<configuration>
-					<source>8</source>
-					<target>9</target>
+					<source>1.8</source>
+					<target>1.8</target>
+					<verbose>true</verbose>
 				</configuration>
 			</plugin>
 		</plugins>
