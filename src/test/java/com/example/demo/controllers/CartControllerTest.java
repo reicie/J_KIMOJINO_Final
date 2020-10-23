@@ -53,12 +53,12 @@ public class CartControllerTest {
     }
 
     @Test
-    public void add_to_cart_happy_path() {
+    public void add_to_cart_success() {
         ModifyCartRequest r = new ModifyCartRequest();
         r.setItemId(1L);
         r.setQuantity(1);
         r.setUsername("test");
-        ResponseEntity<Cart> response = cartController.addTocart(r);
+        ResponseEntity<Cart> response = cartController.addToCart(r);
 
         assertNotNull(response);
         assertEquals(200, response.getStatusCodeValue());
@@ -69,12 +69,12 @@ public class CartControllerTest {
     }
 
     @Test
-    public void add_to_cart_invalid_user() {
+    public void add_to_cart_failed() {
         ModifyCartRequest r = new ModifyCartRequest();
         r.setItemId(1L);
         r.setQuantity(1);
         r.setUsername("boo");
-        ResponseEntity<Cart> response = cartController.addTocart(r);
+        ResponseEntity<Cart> response = cartController.addToCart(r);
 
         assertNotNull(response);
         assertEquals(404, response.getStatusCodeValue());
@@ -86,20 +86,20 @@ public class CartControllerTest {
         r.setItemId(2L);
         r.setQuantity(1);
         r.setUsername("test");
-        ResponseEntity<Cart> response = cartController.addTocart(r);
+        ResponseEntity<Cart> response = cartController.addToCart(r);
 
         assertNotNull(response);
         assertEquals(404, response.getStatusCodeValue());
     }
 
     @Test
-    public void remove_from_cart_happy_path() {
+    public void remove_from_cart_success() {
         // Set up test by adding two items to cart.
         ModifyCartRequest r = new ModifyCartRequest();
         r.setItemId(1L);
         r.setQuantity(2);
         r.setUsername("test");
-        ResponseEntity<Cart> response = cartController.addTocart(r);
+        ResponseEntity<Cart> response = cartController.addToCart(r);
         assertNotNull(response);
         assertEquals(200, response.getStatusCodeValue());
 
@@ -107,7 +107,7 @@ public class CartControllerTest {
         r.setItemId(1L);
         r.setQuantity(1);
         r.setUsername("test");
-        response = cartController.removeFromcart(r);
+        response = cartController.removeFromCart(r);
 
         assertNotNull(response);
         assertEquals(200, response.getStatusCodeValue());
@@ -123,7 +123,7 @@ public class CartControllerTest {
         r.setItemId(1L);
         r.setQuantity(1);
         r.setUsername("boo");
-        ResponseEntity<Cart> response = cartController.removeFromcart(r);
+        ResponseEntity<Cart> response = cartController.removeFromCart(r);
 
         assertNotNull(response);
         assertEquals(404, response.getStatusCodeValue());
@@ -135,7 +135,7 @@ public class CartControllerTest {
         r.setItemId(2L);
         r.setQuantity(1);
         r.setUsername("test");
-        ResponseEntity<Cart> response = cartController.removeFromcart(r);
+        ResponseEntity<Cart> response = cartController.removeFromCart(r);
 
         assertNotNull(response);
         assertEquals(404, response.getStatusCodeValue());

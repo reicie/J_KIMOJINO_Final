@@ -39,20 +39,20 @@ public class UserController {
 
 	@GetMapping("/id/{id}")
 	public ResponseEntity<User> findById(@PathVariable Long id) {
-		log.debug("UserController.findById called with id {}", id);
+		log.info("UserController.findById called with id {}", id);
 		return ResponseEntity.of(userRepository.findById(id));
 	}
 	
 	@GetMapping("/{username}")
 	public ResponseEntity<User> findByUserName(@PathVariable String username) {
-		log.debug("UserController.findByUserName called with username {}");
+		log.info("User has username", username);
 		User user = userRepository.findByUsername(username);
 		return user == null ? ResponseEntity.notFound().build() : ResponseEntity.ok(user);
 	}
 	
 	@PostMapping("/create")
 	public ResponseEntity<User> createUser(@RequestBody CreateUserRequest createUserRequest) {
-		log.debug("UserController.createUser called with username {}", createUserRequest.getUsername());
+		log.info("User name created with", createUserRequest.getUsername());
 		User user = new User();
 		user.setUsername(createUserRequest.getUsername());
 		Cart cart = new Cart();
@@ -62,12 +62,12 @@ public class UserController {
 				createUserRequest.getPassword().length() <= 6 ||
 				!createUserRequest.getPassword().equals(createUserRequest.getConfirmPassword())
 		) {
-			log.error("Cannot create user {} because the password is invalid", createUserRequest.getUsername());
+			log.error("Cannot create user because the password is invalid", createUserRequest.getUsername());
 			return ResponseEntity.badRequest().build();
 		}
 		user.setPassword(bCryptPasswordEncoder.encode(createUserRequest.getPassword()));
 		userRepository.save(user);
-		log.info("New user {} created", createUserRequest.getUsername());
+		log.info("New user created with username: ", createUserRequest.getUsername());
 		return ResponseEntity.ok(user);
 	}
 	
