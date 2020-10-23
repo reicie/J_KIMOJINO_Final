@@ -1,4 +1,5 @@
-auth-course.iml
+*.iml
 target/
 logs/
 .idea/
+screenshot/
